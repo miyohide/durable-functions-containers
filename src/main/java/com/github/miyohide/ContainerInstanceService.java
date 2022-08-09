@@ -4,6 +4,9 @@ import com.azure.core.management.Region;
 import com.azure.resourcemanager.AzureResourceManager;
 import com.azure.resourcemanager.containerinstance.models.ContainerGroup;
 import com.azure.resourcemanager.containerinstance.models.ContainerGroupRestartPolicy;
+import com.azure.resourcemanager.resources.fluentcore.utils.ResourceManagerUtils;
+
+import java.time.Duration;
 
 public class ContainerInstanceService {
     private String resourceGroupName;
@@ -32,6 +35,13 @@ public class ContainerInstanceService {
                 .withRestartPolicy(ContainerGroupRestartPolicy.NEVER)
                 .withDnsPrefix(aciName)
                 .create();
+
+        // 起動中
+        System.out.println("起動中 ..." + containerGroup.ipAddress());
+        Utils.sendGetRequest("http://" + containerGroup.ipAddress());
+        ResourceManagerUtils.sleep(Duration.ofSeconds(15));
+        System.out.println("CURLing " + containerGroup.ipAddress());
+        System.out.println(Utils.sendGetRequest("http://" + containerGroup.ipAddress()));
 
         return true;
     }
