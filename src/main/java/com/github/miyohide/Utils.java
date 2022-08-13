@@ -12,6 +12,7 @@ import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.logging.ClientLogger;
+import com.azure.resourcemanager.AzureResourceManager;
 import reactor.core.publisher.Mono;
 import reactor.util.retry.Retry;
 
@@ -68,4 +69,8 @@ public class Utils {
                     new HttpLoggingPolicy(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC)),
                     new RetryPolicy("Retry-After", ChronoUnit.SECONDS)
             ).build();
+
+    public static String randomResourceName(AzureResourceManager azure, String prefix, int maxLen) {
+        return azure.resourceGroups().manager().internalContext().randomResourceName(prefix, maxLen);
+    }
 }
