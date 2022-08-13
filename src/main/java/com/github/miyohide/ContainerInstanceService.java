@@ -24,7 +24,7 @@ public class ContainerInstanceService {
     public boolean runContainerInstance(AzureResourceManager azureResourceManager) {
         ContainerGroup containerGroup = azureResourceManager.containerGroups().define(aciName)
                 .withRegion(this.region)
-                .withExistingResourceGroup(this.resourceGroupName)
+                .withNewResourceGroup(this.resourceGroupName)
                 .withLinux()
                 .withPublicImageRegistryOnly()
                 .withoutVolume()
