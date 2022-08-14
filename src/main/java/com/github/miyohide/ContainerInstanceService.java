@@ -9,10 +9,10 @@ import com.azure.resourcemanager.resources.fluentcore.utils.ResourceManagerUtils
 import java.time.Duration;
 
 public class ContainerInstanceService {
-    private String resourceGroupName;
-    private Region region;
-    private String containerImage;
-    private String aciName;
+    private final String resourceGroupName;
+    private final Region region;
+    private final String containerImage;
+    private final String aciName;
 
     public ContainerInstanceService(String resourceGroupName, Region region, String containerImage, String aciName) {
         this.resourceGroupName = resourceGroupName;
