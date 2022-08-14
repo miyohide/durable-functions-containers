@@ -18,10 +18,10 @@ public class Main {
                 .withDefaultSubscription();
         ContainerInstanceService containerInstanceService
                 = new ContainerInstanceService(
-                        Utils.randomResourceName(azure, "rg-aci-", 10),
+                        Utils.randomResourceName(azure, "rgaci", 15),
                 Region.JAPAN_EAST,
                 "mcr.microsoft.com/azuredocs/aci-helloworld",
-                Utils.randomResourceName(azure, "acisample", 13));
+                Utils.randomResourceName(azure, "acisample", 20));
 
         containerInstanceService.runContainerInstance(azure);
     }
