@@ -7,5 +7,5 @@ https://docs.microsoft.com/ja-jp/azure/architecture/solution-ideas/articles/dura
 # TODO
 
 - [ ]  `com.azure:azure-sdk-bom`を使うことはできないか？
-    - 以下のIssueを見る限り２０２２年８月時点ではちょっと難しい。
+    - 以下のIssueを見る限り2022年8月時点ではちょっと難しい。
     - https://github.com/Azure/azure-sdk-for-java/issues/28281
