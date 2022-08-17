@@ -47,4 +47,8 @@ public class ContainerInstanceService {
 
         return true;
     }
+
+    public String getStatus() {
+        return containerGroup.state();
+    }
 }
