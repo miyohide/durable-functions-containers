@@ -24,5 +24,6 @@ public class Main {
                 Utils.randomResourceName(azure, "acisample", 20));
 
         containerInstanceService.runContainerInstance(azure);
+        System.out.println(containerInstanceService.getStatus());
     }
 }
