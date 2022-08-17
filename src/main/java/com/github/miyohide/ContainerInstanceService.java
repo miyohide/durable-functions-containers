@@ -9,12 +9,14 @@ import com.azure.resourcemanager.resources.fluentcore.utils.ResourceManagerUtils
 import java.time.Duration;
 
 public class ContainerInstanceService {
+    private ContainerGroup containerGroup;
     private final String resourceGroupName;
     private final Region region;
     private final String containerImage;
     private final String aciName;
 
     public ContainerInstanceService(String resourceGroupName, Region region, String containerImage, String aciName) {
+        this.containerGroup = null;
         this.resourceGroupName = resourceGroupName;
         this.region = region;
         this.containerImage = containerImage;
@@ -22,7 +24,7 @@ public class ContainerInstanceService {
     }
 
     public boolean runContainerInstance(AzureResourceManager azureResourceManager) {
-        ContainerGroup containerGroup = azureResourceManager.containerGroups().define(aciName)
+        containerGroup = azureResourceManager.containerGroups().define(aciName)
                 .withRegion(this.region)
                 .withNewResourceGroup(this.resourceGroupName)
                 .withLinux()
