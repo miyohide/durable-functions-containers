@@ -42,11 +42,11 @@ public class ContainerInstanceService {
                 .create();
 
         // 起動中
+        logger.debug(getStatus());
         logger.debug("起動中 ..." + containerGroup.ipAddress());
         Utils.sendGetRequest("http://" + containerGroup.ipAddress());
         ResourceManagerUtils.sleep(Duration.ofSeconds(15));
-        logger.debug("CURLing " + containerGroup.ipAddress());
-        logger.debug(Utils.sendGetRequest("http://" + containerGroup.ipAddress()));
+        logger.debug(getStatus());
     }
 
     public String getStatus() {
