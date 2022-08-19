@@ -23,7 +23,7 @@ public class ContainerInstanceService {
         this.aciName = aciName;
     }
 
-    public boolean runContainerInstance(AzureResourceManager azureResourceManager) {
+    public void runContainerInstance(AzureResourceManager azureResourceManager) {
         containerGroup = azureResourceManager.containerGroups().define(aciName)
                 .withRegion(this.region)
                 .withNewResourceGroup(this.resourceGroupName)
@@ -44,8 +44,6 @@ public class ContainerInstanceService {
         ResourceManagerUtils.sleep(Duration.ofSeconds(15));
         System.out.println("CURLing " + containerGroup.ipAddress());
         System.out.println(Utils.sendGetRequest("http://" + containerGroup.ipAddress()));
-
-        return true;
     }
 
     public String getStatus() {
