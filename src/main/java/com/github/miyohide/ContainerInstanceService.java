@@ -5,10 +5,13 @@ import com.azure.resourcemanager.AzureResourceManager;
 import com.azure.resourcemanager.containerinstance.models.ContainerGroup;
 import com.azure.resourcemanager.containerinstance.models.ContainerGroupRestartPolicy;
 import com.azure.resourcemanager.resources.fluentcore.utils.ResourceManagerUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.Duration;
 
 public class ContainerInstanceService {
+    Logger logger = LoggerFactory.getLogger(ContainerInstanceService.class);
     private ContainerGroup containerGroup;
     private final String resourceGroupName;
     private final Region region;
@@ -39,11 +42,11 @@ public class ContainerInstanceService {
                 .create();
 
         // 起動中
-        System.out.println("起動中 ..." + containerGroup.ipAddress());
+        logger.debug("起動中 ..." + containerGroup.ipAddress());
         Utils.sendGetRequest("http://" + containerGroup.ipAddress());
         ResourceManagerUtils.sleep(Duration.ofSeconds(15));
-        System.out.println("CURLing " + containerGroup.ipAddress());
-        System.out.println(Utils.sendGetRequest("http://" + containerGroup.ipAddress()));
+        logger.debug("CURLing " + containerGroup.ipAddress());
+        logger.debug(Utils.sendGetRequest("http://" + containerGroup.ipAddress()));
     }
 
     public String getStatus() {
