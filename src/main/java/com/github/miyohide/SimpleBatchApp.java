@@ -19,12 +19,12 @@ public class SimpleBatchApp {
     @FunctionName("StartHelloCities")
     public HttpResponseMessage startHelloCities(
             @HttpTrigger(name = "req", methods = {HttpMethod.GET}) HttpRequestMessage<Optional<String>> req,
-            @DurableClientInput(name = "durableContext") DurableClientContext durableClientContext,
+            @DurableClientInput(name = "durableContext") DurableClientContext durableContext,
             final ExecutionContext context
             ) {
-        DurableTaskClient client = durableClientContext.getClient();
+        DurableTaskClient client = durableContext.getClient();
         String instanceId = client.scheduleNewOrchestrationInstance("HelloCities");
-        return durableClientContext.createCheckStatusResponse(req, instanceId);
+        return durableContext.createCheckStatusResponse(req, instanceId);
     }
 
     @FunctionName("HelloCities")
