@@ -7,10 +7,8 @@ import com.microsoft.azure.functions.HttpResponseMessage;
 import com.microsoft.azure.functions.annotation.FunctionName;
 import com.microsoft.azure.functions.annotation.HttpTrigger;
 import com.microsoft.durabletask.DurableTaskClient;
-import com.microsoft.durabletask.OrchestrationRunner;
 import com.microsoft.durabletask.azurefunctions.DurableClientContext;
 import com.microsoft.durabletask.azurefunctions.DurableClientInput;
-import com.microsoft.durabletask.azurefunctions.DurableOrchestrationTrigger;
 
 import java.util.Optional;
 
@@ -24,16 +22,5 @@ public class SimpleBatchApp {
         DurableTaskClient client = durableContext.getClient();
         String instanceId = client.scheduleNewOrchestrationInstance("HelloCities");
         return durableContext.createCheckStatusResponse(req, instanceId);
-    }
-
-    @FunctionName("HelloCities")
-    public String helloCitiesOrchestrator(@DurableOrchestrationTrigger(name = "runtimeState") String runtimeState) {
-        return OrchestrationRunner.loadAndRun(runtimeState, ctx -> {
-            String result = "";
-            result += ctx.callActivity("SayHello", "Tokyo", String.class);
-            result += ctx.callActivity("SayHello", "London", String.class);
-            result += ctx.callActivity("SayHello", "Seattle", String.class);
-            return result;
-        });
     }
 }
