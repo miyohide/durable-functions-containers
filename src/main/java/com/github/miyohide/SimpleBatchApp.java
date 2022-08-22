@@ -8,7 +8,6 @@ import com.microsoft.azure.functions.annotation.FunctionName;
 import com.microsoft.azure.functions.annotation.HttpTrigger;
 import com.microsoft.durabletask.DurableTaskClient;
 import com.microsoft.durabletask.OrchestrationRunner;
-import com.microsoft.durabletask.azurefunctions.DurableActivityTrigger;
 import com.microsoft.durabletask.azurefunctions.DurableClientContext;
 import com.microsoft.durabletask.azurefunctions.DurableClientInput;
 import com.microsoft.durabletask.azurefunctions.DurableOrchestrationTrigger;
@@ -36,10 +35,5 @@ public class SimpleBatchApp {
             result += ctx.callActivity("SayHello", "Seattle", String.class);
             return result;
         });
-    }
-
-    @FunctionName("SayHello")
-    public String sayHello(@DurableActivityTrigger(name = "name") String name) {
-        return String.format("Hello %s!", name);
     }
 }
